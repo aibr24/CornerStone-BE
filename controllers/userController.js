@@ -18,6 +18,7 @@ exports.signup = async (req, res, next) => {
             lastName: newUser.lastName,
             expires: Date.now() + JWT_EXPIRATION_MS,
         };
+        console.log(req.body);
         const token = jwt.sign(JSON.stringify(payload), JWT_SECRET);
         res.status(201).json({ token });
     } catch (error) {
@@ -27,13 +28,14 @@ exports.signup = async (req, res, next) => {
 
 exports.signin = async (req, res) => {
     const payload = {
-        id: req.body.id,
+        id: req.user.id,
         username: req.body.username,
         email: req.body.email,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         expires: Date.now() + parseInt(JWT_EXPIRATION_MS),
     };
+    console.log(payload)
     const token = jwt.sign(JSON.stringify(payload), JWT_SECRET);
     res.json({ token });
     console.log(token);
