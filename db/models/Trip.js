@@ -1,24 +1,25 @@
 const { DataTypes, Model } = require("sequelize");
 const db = require("../db");
 
-class Trip extends Model { }
+class Trip extends Model {}
 
-Trip.init({
+Trip.init(
+  {
     title: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     details: {
-        type: DataTypes.STRING,
-        unique: true,
+      type: DataTypes.STRING,
+      unique: true,
     },
     image: {
-        type: DataTypes.STRING,
+      type: DataTypes.STRING,
     },
-},
-    {
-        sequelize: db,
-    }
+  },
+  {
+    sequelize: db,
+  }
 );
 
 module.exports = Trip;

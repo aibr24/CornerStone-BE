@@ -5,36 +5,38 @@ const bcrypt = require("bcrypt");
 const User = require("../db/models/User");
 const { JWT_SECRET } = require("../config/keys");
 
-exports.localStrategy = new LocalStrategy(
-    async (username, password, done) => {
-        try {
-            const user = await User.findOne({
-                where: { username },
-            });
-
-            const passwordsMatch = user
-                ? await bcrypt.compare(password, user.password)
-                : false;
-            if (passwordsMatch) {
-                return done(null, user);
-            }
-        } catch (error) {
-            done(null, false);
-        }
+exports.localStrategy = new LocalStrategy(async (username, password, done) => {
+  try {
+    const user = await User.findOne({
+      where: { username },
     });
 
-exports.jwtStrategy = new JWTStrategy({
+    const passwordsMatch = user
+      ? await bcrypt.compare(password, user.password)
+      : false;
+    if (passwordsMatch) {
+      return done(null, user);
+    }
+  } catch (error) {
+    done(null, false); // return done
+  }
+});
+
+exports.jwtStrategy = new JWTStrategy(
+  {
     jwtFromRequest: fromAuthHeaderAsBearerToken(),
     secretOrKey: JWT_SECRET,
-}, async (jwtPayload, done) => {
+  },
+  async (jwtPayload, done) => {
     if (Date.now() > jwtPayload.expires) {
-        return done(null, false);
-    } else {
-        try {
-            const user = await User.findByPk(jwtPayload.id);
-            done(null, user);
-        } catch (error) {
-            done(error);
-        }
+      return done(null, false);
+    } /* you don't need the else */ else {
+      try {
+        const user = await User.findByPk(jwtPayload.id);
+        done(null, user); // return done
+      } catch (error) {
+        done(error); // return done
+      }
     }
-});
+  }
+);
