@@ -1,35 +1,36 @@
 const { DataTypes, Model } = require("sequelize");
 const db = require("../db");
 
-class User extends Model { }
+class User extends Model {}
 
 User.init(
-    {
-        username: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: {
-                args: true,
-                msg: "Username already exists"
-            }
-        },
-        firstName: {
-            type: DataTypes.STRING,
-        },
-        lastName: {
-            type: DataTypes.STRING,
-        },
-        email: {
-            type: DataTypes.STRING,
-        },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
+  {
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: {
+        args: true,
+        msg: "Username already exists",
+      },
     },
-    {
-        sequelize: db,
-    }
+    firstName: {
+      type: DataTypes.STRING,
+    },
+    lastName: {
+      type: DataTypes.STRING,
+    },
+    email: {
+      // email is required?
+      type: DataTypes.STRING,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  {
+    sequelize: db,
+  }
 );
 
 module.exports = User;
