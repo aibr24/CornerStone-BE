@@ -1,8 +1,7 @@
 const { Trip, User } = require("../db/models/index.js");
 
 // Fetch
-// should receive `next` as parameter
-exports.fetchTrip = async (tripId) => {
+exports.fetchTrip = async (tripId, next) => {
   try {
     const trip = await Trip.findByPk(tripId, {
       include: {
@@ -55,7 +54,7 @@ exports.tripUpdate = async (req, res, next) => {
   }
 };
 
-// Delete
+// TripDelete
 exports.tripDelete = async (req, res, next) => {
   try {
     if (req.user && req.user.id === req.trip.userId) {
@@ -71,7 +70,7 @@ exports.tripDelete = async (req, res, next) => {
   }
 };
 
-// UserCreate <-- ??
+// TripCreate
 exports.tripCreate = async (req, res, next) => {
   try {
     if (req.file) {
