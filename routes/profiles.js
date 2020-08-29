@@ -5,6 +5,7 @@ const upload = require("../middleware/multer");
 const {
   profileUpdate,
   fetchProfile,
+  profileList,
 } = require("../controllers/profileController");
 
 // Param
@@ -19,6 +20,9 @@ router.param("profileId", async (req, res, next, profileId) => {
     next(err);
   }
 });
+
+// List
+router.get("/", profileList);
 
 // UpdateProfile
 router.put(
