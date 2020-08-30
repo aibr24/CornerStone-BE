@@ -36,6 +36,7 @@ exports.tripList = async (req, res, next) => {
 // Update
 exports.tripUpdate = async (req, res, next) => {
   try {
+    // REVIEW: You don't need to check if req.user exists, this is the job of jwt strategy, if it doesn't exist the request will return 401 and it will never reach the controller.
     if (req.user && req.user.id === req.trip.userId) {
       if (req.file) {
         req.body.image = `${process.env.PORT ? "https" : "http"}://${req.get(
@@ -57,6 +58,7 @@ exports.tripUpdate = async (req, res, next) => {
 // TripDelete
 exports.tripDelete = async (req, res, next) => {
   try {
+    // REVIEW: You don't need to check if req.user exists, this is the job of jwt strategy, if it doesn't exist the request will return 401 and it will never reach the controller.
     if (req.user && req.user.id === req.trip.userId) {
       await req.trip.destroy();
       res.status(204).end();

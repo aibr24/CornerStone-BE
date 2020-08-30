@@ -26,6 +26,7 @@ exports.signup = async (req, res, next) => {
       bio: "",
       image: "",
     };
+    // REVIEW: create is asynchronous, add an await
     Profile.create(newProfile);
     const token = jwt.sign(JSON.stringify(payload), JWT_SECRET);
     res.status(201).json({ token });

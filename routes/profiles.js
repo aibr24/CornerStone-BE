@@ -8,6 +8,8 @@ const {
   profileList,
 } = require("../controllers/profileController");
 
+// Something to think about: If you only have 1 route using `profileId`, do you need the route param middleware?
+
 // Param
 router.param("profileId", async (req, res, next, profileId) => {
   const profile = await fetchProfile(profileId, next);

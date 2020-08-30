@@ -42,6 +42,7 @@ router.delete(
   tripDelete
 );
 
+// REVIEW: why does this poor route has no comment title? Hassan you're evil
 router.post("/", passport.authenticate("jwt", { session: false }), tripCreate);
 
 module.exports = router;

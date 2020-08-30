@@ -11,7 +11,7 @@ Trip.init(
     },
     details: {
       type: DataTypes.STRING,
-      unique: true,
+      unique: true, // why does it need to be unique? if you have an answer give it to me during the standup meeting or delete it
     },
     image: {
       type: DataTypes.STRING,

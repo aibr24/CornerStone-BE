@@ -7,7 +7,7 @@ Profile.init(
   {
     bio: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false, // REVIEW: this is unnecessary
     },
     image: {
       type: DataTypes.STRING,
