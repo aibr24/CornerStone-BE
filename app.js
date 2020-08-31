@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 // Routers use
 app.use(userRoutes);
 app.use("/trips", tripRoutes);
-app.use("/profile", profileRoutes);
+app.use("/profiles", profileRoutes);
 
 // Error Handeling MiddleWare
 app.use((err, req, res, next) => {

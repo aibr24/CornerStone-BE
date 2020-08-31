@@ -11,7 +11,6 @@ Trip.init(
     },
     details: {
       type: DataTypes.STRING,
-      unique: true,
     },
     image: {
       type: DataTypes.STRING,
