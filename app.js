@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 // Routers use
 app.use(userRoutes);
 app.use("/trips", tripRoutes);
-app.use("/profile", profileRoutes);
+app.use("/profiles", profileRoutes);
 
 // Error Handeling MiddleWare
 app.use((err, req, res, next) => {
@@ -35,7 +35,7 @@ app.use((err, req, res, next) => {
 
 const run = async () => {
   try {
-    await db.sync({ alter: true });
+    await db.sync();
     console.log("Connection to the database successful!");
   } catch (error) {
     console.error("Error connecting to the database: ", error);
