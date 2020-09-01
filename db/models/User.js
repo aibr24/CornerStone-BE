@@ -20,7 +20,6 @@ User.init(
       type: DataTypes.STRING,
     },
     email: {
-      // email is required?
       type: DataTypes.STRING,
     },
     password: {

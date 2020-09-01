@@ -20,7 +20,7 @@ exports.signup = async (req, res, next) => {
       expires: Date.now() + JWT_EXPIRATION_MS,
     };
 
-    //Creating Profile
+    //Generating Profile
     const newProfile = {
       userId: newUser.id,
       bio: "",
