@@ -1,5 +1,6 @@
 const Profile = require("../db/models/Profile");
 const User = require("../db/models/User");
+
 // Fetch
 exports.fetchProfile = async (profileId, next) => {
   try {
