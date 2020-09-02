@@ -42,6 +42,7 @@ router.delete(
   tripDelete
 );
 
+// REVIEW: الcreate مالها رب? Give it a comment title
 router.post("/", passport.authenticate("jwt", { session: false }), tripCreate);
 
 module.exports = router;
