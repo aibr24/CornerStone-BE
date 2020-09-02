@@ -33,7 +33,9 @@ exports.profileList = async (req, res, next) => {
 exports.profileUpdate = async (req, res, next) => {
   try {
     const { profile } = req;
+    // REVIEW: You don't need to check if `req.user` exists or not. If it doesn't exist jwt strategy won't allow it to reach the controller. I believe I've mentioned this before 🤔
     if (req.user && req.user.id === profile.userId) {
+      // REVIEW: You de-structured req.profile above, why are you not using the de-structured one?
       await req.profile.update(req.body);
       res.status(204).end();
     } else {
