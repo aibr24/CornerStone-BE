@@ -22,14 +22,18 @@ exports.tripList = async (req, res, next) => {
   try {
     const trips = await Trip.findAll({
       attributes: { exclude: ["createdAt", "updatedAt"] },
-      include: {
-        model: User,
-        as: "user",
-        attributes: ["username"],
-        model: Comment,
-        as: "comments",
-        attributes: ["question", "answer"],
-      },
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["username"],
+        },
+        {
+          model: Comment,
+          as: "comments",
+          attributes: ["question", "answer", "id"],
+        },
+      ],
     });
     res.json(trips);
   } catch (error) {
@@ -90,11 +94,14 @@ exports.tripCreate = async (req, res, next) => {
   }
 };
 
-//Comment Create
+// Comment Create
 exports.commentCreate = async (req, res, next) => {
   try {
+    req.body.tripId = req.trip.id;
     const newComment = await Comment.create(req.body);
-    newComment.tripId = tripId;
+    console.log(newComment);
     res.status(201).json(newComment);
-  } catch (error) {}
+  } catch (error) {
+    next(error);
+  }
 };

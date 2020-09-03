@@ -47,6 +47,6 @@ router.delete(
 router.post("/", passport.authenticate("jwt", { session: false }), tripCreate);
 
 // CommentCreate
-router.post("/tripId/comments", commentCreate);
+router.post("/:tripId/comments", commentCreate);
 
 module.exports = router;
