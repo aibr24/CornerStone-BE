@@ -9,6 +9,7 @@ const {
   tripDelete,
   fetchTrip,
   tripCreate,
+  commentCreate,
 } = require("../controllers/tripController");
 
 // Param
@@ -24,10 +25,10 @@ router.param("tripId", async (req, res, next, tripId) => {
   }
 });
 
-// List
+// TripList
 router.get("/", tripList);
 
-// Update
+// TripUpdate
 router.put(
   "/:tripId",
   passport.authenticate("jwt", { session: false }),
@@ -35,14 +36,17 @@ router.put(
   tripUpdate
 );
 
-// Delete
+// TripDelete
 router.delete(
   "/:tripId",
   passport.authenticate("jwt", { session: false }),
   tripDelete
 );
 
-// REVIEW: الcreate مالها رب? Give it a comment title
+// TripCreate
 router.post("/", passport.authenticate("jwt", { session: false }), tripCreate);
+
+// CommentCreate
+router.post("/tripId/comments", commentCreate);
 
 module.exports = router;

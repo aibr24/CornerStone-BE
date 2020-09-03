@@ -1,4 +1,5 @@
 const { Trip, User } = require("../db/models/index.js");
+const Comment = require("../db/models/Comment.js");
 
 // Fetch
 exports.fetchTrip = async (tripId, next) => {
@@ -25,6 +26,9 @@ exports.tripList = async (req, res, next) => {
         model: User,
         as: "user",
         attributes: ["username"],
+        model: Comment,
+        as: "comments",
+        attributes: ["question", "answer"],
       },
     });
     res.json(trips);
@@ -84,4 +88,13 @@ exports.tripCreate = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+//Comment Create
+exports.commentCreate = async (req, res, next) => {
+  try {
+    const newComment = await Comment.create(req.body);
+    newComment.tripId = tripId;
+    res.status(201).json(newComment);
+  } catch (error) {}
 };
