@@ -9,7 +9,7 @@ const { localStrategy, jwtStrategy } = require("./middleware/passport");
 const userRoutes = require("./routes/users");
 const tripRoutes = require("./routes/trips");
 const profileRoutes = require("./routes/profiles");
-
+const commentRoutes = require("./routes/comments");
 // Express instance
 const app = express();
 
@@ -24,6 +24,7 @@ app.use(bodyParser.json());
 app.use(userRoutes);
 app.use("/trips", tripRoutes);
 app.use("/profiles", profileRoutes);
+app.use("/comments", commentRoutes);
 
 // Error Handeling MiddleWare
 app.use((err, req, res, next) => {

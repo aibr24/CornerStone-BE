@@ -15,6 +15,10 @@ Trip.init(
     image: {
       type: DataTypes.STRING,
     },
+    fav: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   },
   {
     sequelize: db,
