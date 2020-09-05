@@ -10,6 +10,7 @@ Comment.init(
     },
     answer: {
       type: DataTypes.STRING,
+      defaultValue: "",
     },
   },
   {
